@@ -1,1 +1,3 @@
 # Astar
+
+spain.csv must be put in the same directory in order for the program to work. Then just compile and execute "Astar-rw.c" and "Astar-algo.c"  (in that order). Astar-rw.c reads the csv file, builds the graph and stores it into a binary file in the same directory called "graph.bin". "Astar-algo" reads the binary file and executes the algorithm, outputting the total distance between the initial and the goal node.
