@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 #include "utils.h"
 static FILE *fin = NULL;
 static Node *nodes = NULL;
@@ -147,10 +148,12 @@ void printpath(Node *node) // for debug purposes
     printf("Distance: %f\n", node ->g);
 }
 int main(int argc, const char * argv[])
-{
+{   
+    clock_t start = clock();
     read_binary_file();
+    printf("Read binary file: %f seconds\n", (double)(clock() - start)/CLOCKS_PER_SEC );
     /* We start the Astar algorithm */
-    
+    start = clock();
     //Initialize status
     Node *root = binary_search(240949599, nodes, nnodes);
     Node *goal = binary_search(195977239, nodes, nnodes);
@@ -169,10 +172,8 @@ int main(int argc, const char * argv[])
     Node *node_successor = NULL;
     double cost  = 0;
     int iter = 0;
-    printf("nsucc: %d\n", binary_search(240950216, nodes, nnodes) ->nsucc);
     while(true)
     {
-//        printf("Node id: %lu, nsucc: %d\n", Q.start ->id, Q.start ->nsucc);
         if(Q.start ->id == goal ->id)
         {
             printf("Found it ID: %lu\n", Q.start ->id);
@@ -180,13 +181,10 @@ int main(int argc, const char * argv[])
         }
         for(i = 0; i < Q.start ->nsucc; ++i)
         { 
-//            printf("%i\n", i);
             node_successor = binary_search(Q.start ->successors[i], nodes, nnodes);
             cost =  Q.start ->g  +  h(Q.start->lat, node_successor ->lat,  Q.start ->lon, node_successor ->lon);
-//            printf("Successor: %lu, cost: %f\n", node_successor ->id, cost);
             if(node_successor -> which_queue == OPEN )
             {
-//                puts("if");
                 if(node_successor ->g <= cost) continue;
                 else
                 {
@@ -199,7 +197,6 @@ int main(int argc, const char * argv[])
                 }
             }else if(node_successor -> which_queue == CLOSED )
             {
-//                puts("elif");
                 if(node_successor ->g <= cost) continue;
                 node_successor -> which_queue = OPEN;
                 node_successor ->g = cost;
@@ -207,7 +204,6 @@ int main(int argc, const char * argv[])
                 ++Q.len;
             }else
             {
-//                puts("else");
                 node_successor->h = h(node_successor->lat , goal ->lat, node_successor ->lon, goal ->lon);
                 node_successor ->which_queue = OPEN;
                 node_successor ->g = cost;
@@ -219,25 +215,10 @@ int main(int argc, const char * argv[])
         }
         Q.start ->which_queue = CLOSED;
         Q.start = Q.start ->next;
-//        printf("h: %f\n", Q.start ->h);
-//        ++iter;
-//        if(iter == -1){
-//            printstatus(&Q);
-//            exit(11);
-//        }
-//        if(iter % 10000 == 0)
-//        {
-//            printf("ID: %lu\n", Q.start ->id);
-//            printf("len: %lu\n", Q.len);
-//        }
-//        printstatus(&Q);
-//        printf("ID = %lu\n", Q.start ->id);
-//        if(iter == 10) break;
-        
         if(Q.start == NULL) break;
         
     }
     printpath(goal);
-    
+    printf("Astar execution: %f seconds\n", (double)(clock() - start)/CLOCKS_PER_SEC );
     return 0;
 }
