@@ -44,7 +44,6 @@ void join(Node *arr, unsigned long len, unsigned long A, unsigned long B, char *
                 if( b ->nsucc > 2)
                     b ->successors = (unsigned long*)realloc(b ->successors, (b->nsucc)*sizeof(unsigned long));
                 if((b ->successors) == NULL) puts("fail allocating succesors");
-//                if((sizeof(b ->successors)/sizeof(unsigned long)) - 1 != b ->nsucc){puts("out of bounds"); exit(115);}
                 b ->successors[b ->nsucc - 1] = a -> id;
                 
             }
