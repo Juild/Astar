@@ -91,17 +91,7 @@ void read_file(FILE *file, Node *nodes, unsigned long nnodes, char delim)
                     ++way_arr_len;
                     way_arr = (unsigned long *)realloc(way_arr, way_arr_len*sizeof(unsigned long));
                     way_arr[way_arr_len -1] = key_A;
-//                    if(*line_buff == '\n') break;
-//                    key_A = strsep(&line_buff, &delim); // always first @id of the pairs @membernode
-////                    printf("A: %s\n", key_A);
-////                    if(line_buff == NULL) break; // Case @way| ... |A\n
-//                     // Case @way| ... |A|\n
-//                    key_B = strsep(&line_buff, &delim);
-////                    printf("B: %s\n", key_A);
-//                    // Now we have to join those nodes
-//                    join(nodes, nnodes, strtoul(key_A, &tmp, 10), strtoul(key_B,  &tmp, 10), one_way);
                 }
-//                printf("arr_len = %iu\n", way_arr_len);
                 for(int i = 0, j = 1; j < way_arr_len; ++i, ++j)
                     join(nodes, nnodes, way_arr[i], way_arr[j], one_way);
                 free(way_arr);

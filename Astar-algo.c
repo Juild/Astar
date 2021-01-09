@@ -147,14 +147,8 @@ void printpath(Node *node) // for debug purposes
     printf("Nodes: %d\n", n);
     printf("Distance: %f\n", node ->g);
 }
-int main(int argc, const char * argv[])
-{   
-    clock_t start = clock();
-    read_binary_file();
-    printf("Read binary file: %f seconds\n", (double)(clock() - start)/CLOCKS_PER_SEC );
-    /* We start the Astar algorithm */
-    start = clock();
-    //Initialize status
+void Astar(){
+        //Initialize status
     Node *root = binary_search(240949599, nodes, nnodes);
     Node *goal = binary_search(195977239, nodes, nnodes);
     // init g and h for all nodes
@@ -219,6 +213,15 @@ int main(int argc, const char * argv[])
         
     }
     printpath(goal);
+}
+int main(int argc, const char * argv[])
+{   
+    clock_t start = clock();
+    read_binary_file();
+    printf("Read binary file: %f seconds\n", (double)(clock() - start)/CLOCKS_PER_SEC );
+    /* We start the Astar algorithm */
+    start = clock();
+    Astar();
     printf("Astar execution: %f seconds\n", (double)(clock() - start)/CLOCKS_PER_SEC );
     return 0;
 }
