@@ -191,5 +191,8 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
+    fclose(fin);
+    free(nodes);
+
     return 0;
 }
