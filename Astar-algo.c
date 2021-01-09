@@ -50,16 +50,27 @@ double h(double lat1, double lat2, double lon1, double lon2)
 {
     const double phi = lat1 * M_PI/180;
     const double phi2 = lat2 * M_PI/180;
-    const double lambda = (lon2-lon1) * M_PI/180;
-//    double d = acos( sin(phi)*sin(phi2) + cos(phi)*cos(phi2) *cos(lambda) ) * R;
+    const double dlambda = (lon2-lon1) * M_PI/180;
     const double dphi = (lat2-lat1) * M_PI/180;
 
-    const double a = sin(dphi/2) * sin(dphi/2) +
+    const double a = pow(sin(dphi/2),2) +
               cos(phi) * cos(phi2) *
-              sin(lambda/2) * sin(lambda/2);
-    const double c = 2 * atan2(sqrt(a), sqrt(1-a));
-    double d = R * c; // in metres
+              pow(sin(dlambda/2),2);
+    const double c = asin(sqrt(a));
+    double d = 2 * R * c; // in metres
     return d;
+//     const double phi = lat1 * M_PI/180;
+//     const double phi2 = lat2 * M_PI/180;
+//     const double lambda = (lon2-lon1) * M_PI/180;
+// //    double d = acos( sin(phi)*sin(phi2) + cos(phi)*cos(phi2) *cos(lambda) ) * R;
+//     const double dphi = (lat2-lat1) * M_PI/180;
+
+//     const double a = sin(dphi/2) * sin(dphi/2) +
+//               cos(phi) * cos(phi2) *
+//               sin(lambda/2) * sin(lambda/2);
+//     const double c = 2 * atan2(sqrt(a), sqrt(1-a));
+//     double d = R * c; // in metres
+//     return d;
 }
 void printstatus(Queue *Q) // for debug purposes
 {
@@ -117,17 +128,21 @@ void init_gh(Node *arr, unsigned long len)
         arr[i].g = 0; arr[i].h = 0; arr[i].parent = NULL; arr[i].next = NULL; arr[i].which_queue = NONE;
         
     }
-}
+} 
 
 void printpath(Node *node) // for debug purposes
 {
     Node *iter;
     iter = node;
     int n = 0;
+    FILE *out = fopen("path.csv", "w");
     while (iter ->parent != NULL) {
         ++n;
+        fprintf(out, "%ld\n", iter -> id);
         iter = iter ->parent;
     }
+    fprintf(out, "%ld\n", iter -> id);
+    fclose(out);
     printf("Nodes: %d\n", n);
     printf("Distance: %f\n", node ->g);
 }
