@@ -137,12 +137,13 @@ void printpath(Node *node) // for debug purposes
     iter = node;
     int n = 0;
     FILE *out = fopen("path.csv", "w");
+    fprintf(out, "Node ID|Latitude|Longitude\n");
     while (iter ->parent != NULL) {
         ++n;
-        fprintf(out, "%ld\n", iter -> id);
+        fprintf(out, "%ld|%f|%f\n", iter -> id, iter -> lat, iter -> lon);
         iter = iter ->parent;
     }
-    fprintf(out, "%ld\n", iter -> id);
+    fprintf(out, "%ld|%f|%f\n", iter -> id, iter -> lat, iter -> lon);
     fclose(out);
     printf("Nodes: %d\n", n);
     printf("Distance: %f\n", node ->g);
