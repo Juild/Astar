@@ -16,8 +16,7 @@
 // Functions
 char *skip(char **buff, char* field, char *delim, unsigned long n) // function to skip fields
 {
-    for(int i = 0; i < n; ++i) {field = strsep(buff, delim); /*printf("Line buffer: %s\n", *buff)*/;}
-//    printf("Field: %s\n", field);
+    for(int i = 0; i < n; ++i) {field = strsep(buff, delim);}
     return field;
 }
 
@@ -75,7 +74,6 @@ void read_file(FILE *file, Node *nodes, unsigned long nnodes, char delim)
         field = strsep(&line_buff, &delim); // node, way or relation
         if(*field == 'r')// if it's a relation we are not interested
         {
-            puts("Relations not interested");
             break;
         }
         switch (*field)
@@ -149,10 +147,7 @@ int main(int argc, char *argv[])
     if(file == NULL) {puts("No file!"); return 1;}
     read_file(file, nodes, nnodes, '|');
     fclose(file);
-    Node *a = binary_search(1472924732, nodes, nnodes);
-    printf("ID: %lu\n", a ->id);
-    for(int i = 0; i < a ->nsucc; ++i)printf("%lu, ", a->successors[i]);
-    puts("");
+
     // Declare binary file
     FILE *fin = NULL;
     char name[] = "graph.bin";
