@@ -60,18 +60,6 @@ double h(double lat1, double lat2, double lon1, double lon2)
     const double c = asin(sqrt(a));
     double d = 2 * R * c; // in metres
     return d;
-//     const double phi = lat1 * M_PI/180;
-//     const double phi2 = lat2 * M_PI/180;
-//     const double lambda = (lon2-lon1) * M_PI/180;
-// //    double d = acos( sin(phi)*sin(phi2) + cos(phi)*cos(phi2) *cos(lambda) ) * R;
-//     const double dphi = (lat2-lat1) * M_PI/180;
-
-//     const double a = sin(dphi/2) * sin(dphi/2) +
-//               cos(phi) * cos(phi2) *
-//               sin(lambda/2) * sin(lambda/2);
-//     const double c = 2 * atan2(sqrt(a), sqrt(1-a));
-//     double d = R * c; // in metres
-//     return d;
 }
 void printstatus(Queue *Q) // for debug purposes
 {
