@@ -1,3 +1,14 @@
-# Astar
+# Astar Project README
 
-spain.csv must be put in the same directory in order for the program to work. Then just compile and execute "Astar-rw.c" and "Astar-algo.c"  (in that order). Astar-rw.c reads the csv file, builds the graph and stores it into a binary file in the same directory called "graph.bin". "Astar-algo" reads the binary file and executes the algorithm, outputting the total distance between the initial and the goal node.
+## Introduction
+
+This repository contains a C program for processing data from CSV files and performing A* pathfinding algorithm operations. The code is organized into multiple source files within the "src" directory.
+
+## Code Overview
+
+The code is organized into the following files:
+
+- **Astar-algo.c**: This file contains the implementation of the A* pathfinding algorithm. It includes functions for finding the shortest path in a graph.
+- **Astar-rw.c**: This file is responsible for reading data from CSV files, processing the data, and building a graph. It also handles writing the processed data to a binary file.
+- **utils.h**: This header file likely contains function declarations and possibly data structures used in the main program files (Astar-algo.c and Astar-rw.c).
+
