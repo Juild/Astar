@@ -1,4 +1,4 @@
-# Astar Project README
+# Astar Project
 
 ## Introduction
 
