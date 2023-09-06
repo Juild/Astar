@@ -1,4 +1,4 @@
-# Astar Project
+# A* Project
 
 ## Introduction
 
